@@ -57,3 +57,9 @@ task(
         file_put_contents($localConfigFile, $content);
     }
 );
+
+desc('Ask if the .env.local is filled in correctly');
+task('sumo:config:check', function () {
+    askConfirmation('Is the .env.local filled in correctly?');
+});
+before('database:migrate', 'sumo:config:check');
