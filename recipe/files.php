@@ -73,5 +73,6 @@ task('sumo:files:cleanup', function () {
     run('rm -rf {{release_path}}/var/docker');
     run('rm -rf {{release_path}}/.gitlab-ci');
     run('rm -rf {{release_path}}/.phpcs.xml.dist');
+    run('rm -rf {{release_path}}/.gitlab-ci.yml');
 });
 before('deploy:symlink', 'sumo:files:cleanup');
