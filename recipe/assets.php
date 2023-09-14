@@ -75,7 +75,7 @@ desc('Uploads the assets');
 task(
     'sumo:assets:upload',
     function () {
-        upload('public/build', '{{release_path}}/public');
+        upload('public/assets', '{{release_path}}/public');
     }
 );
 
