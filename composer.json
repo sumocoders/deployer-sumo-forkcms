@@ -1,5 +1,5 @@
 {
-    "name": "tijsverkoyen/deployer-sumo",
+    "name": "sumocoders/deployer-sumo-forkcms",
     "description": "Deployer recipe with SumoCoders specific tasks",
     "type": "library",
     "license": "MIT",
