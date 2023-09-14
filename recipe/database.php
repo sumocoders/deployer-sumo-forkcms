@@ -21,9 +21,13 @@ desc('Create the local database if it does not exists yet');
 task(
     'sumo:db:create-local',
     function () use ($databaseUtility) {
-        $localDatabaseUrl = parse_url(
-            Configuration::fromLocal()->get('DATABASE_URL')
-        );
+        $localHost = Configuration::fromLocal()->get('FORK_DATABASE_HOST');
+        $localPort = Configuration::fromLocal()->get('FORK_DATABASE_PORT');
+        $localName = Configuration::fromLocal()->get('FORK_DATABASE_NAME');
+        $localUser = Configuration::fromLocal()->get('FORK_DATABASE_USER');
+        $localPassword = Configuration::fromLocal()->get('FORK_DATABASE_PASSWORD');
+
+        $localDatabaseUrl = parse_url("mysql://{$localUser}:{$localPassword}@{$localHost}:{$localPort}/{$localName}?serverVersion=5.7&charset=utf8mb4");
 
         runLocally(
             sprintf(
@@ -49,12 +53,20 @@ desc('Replace the local database with the remote database');
 task(
     'sumo:db:get',
     function () use ($databaseUtility) {
-        $remoteDatabaseUrl = parse_url(
-            Configuration::fromRemote()->get('DATABASE_URL')
-        );
-        $localDatabaseUrl = parse_url(
-            Configuration::fromLocal()->get('DATABASE_URL')
-        );
+        $remoteHost = Configuration::fromRemote()->get('FORK_DATABASE_HOST');
+        $remotePort = Configuration::fromRemote()->get('FORK_DATABASE_PORT');
+        $remoteName = Configuration::fromRemote()->get('FORK_DATABASE_NAME');
+        $remoteUser = Configuration::fromRemote()->get('FORK_DATABASE_USER');
+        $remotePassword = Configuration::fromRemote()->get('FORK_DATABASE_PASSWORD');
+
+        $localHost = Configuration::fromLocal()->get('FORK_DATABASE_HOST');
+        $localPort = Configuration::fromLocal()->get('FORK_DATABASE_PORT');
+        $localName = Configuration::fromLocal()->get('FORK_DATABASE_NAME');
+        $localUser = Configuration::fromLocal()->get('FORK_DATABASE_USER');
+        $localPassword = Configuration::fromLocal()->get('FORK_DATABASE_PASSWORD');
+
+        $remoteDatabaseUrl = parse_url("mysql://{$remoteUser}:{$remotePassword}@{$remoteHost}:{$remotePort}/{$remoteName}?serverVersion=5.7&charset=utf8mb4");
+        $localDatabaseUrl = parse_url("mysql://{$localUser}:{$localPassword}@{$localHost}:{$localPort}/{$localName}?serverVersion=5.7&charset=utf8mb4");
 
         run(
             sprintf(
@@ -84,12 +96,20 @@ desc('Replace the remote database with the local database');
 task(
     'sumo:db:put',
     function () use ($databaseUtility) {
-        $remoteDatabaseUrl = parse_url(
-            Configuration::fromRemote()->get('DATABASE_URL')
-        );
-        $localDatabaseUrl = parse_url(
-            Configuration::fromLocal()->get('DATABASE_URL')
-        );
+        $remoteHost = Configuration::fromRemote()->get('FORK_DATABASE_HOST');
+        $remotePort = Configuration::fromRemote()->get('FORK_DATABASE_PORT');
+        $remoteName = Configuration::fromRemote()->get('FORK_DATABASE_NAME');
+        $remoteUser = Configuration::fromRemote()->get('FORK_DATABASE_USER');
+        $remotePassword = Configuration::fromRemote()->get('FORK_DATABASE_PASSWORD');
+
+        $localHost = Configuration::fromLocal()->get('FORK_DATABASE_HOST');
+        $localPort = Configuration::fromLocal()->get('FORK_DATABASE_PORT');
+        $localName = Configuration::fromLocal()->get('FORK_DATABASE_NAME');
+        $localUser = Configuration::fromLocal()->get('FORK_DATABASE_USER');
+        $localPassword = Configuration::fromLocal()->get('FORK_DATABASE_PASSWORD');
+
+        $remoteDatabaseUrl = parse_url("mysql://{$remoteUser}:{$remotePassword}@{$remoteHost}:{$remotePort}/{$remoteName}?serverVersion=5.7&charset=utf8mb4");
+        $localDatabaseUrl = parse_url("mysql://{$localUser}:{$localPassword}@{$localHost}:{$localPort}/{$localName}?serverVersion=5.7&charset=utf8mb4");
 
         // create a backup
         // @todo make separate backup dir
