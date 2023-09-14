@@ -54,3 +54,23 @@ task(
         }
     }
 );
+
+desc('Cleanup the codebase');
+task('sumo:files:cleanup', function () {
+    run('rm -rf {{release_path}}/.github');
+    run('rm -rf {{release_path}}/.git');
+    run('rm -rf {{release_path}}/.gitattributes');
+    run('rm -rf {{release_path}}/Dockerfile');
+    run('rm -rf {{release_path}}/docker-compose.yml');
+    run('rm -rf {{release_path}}/.scrutinizer.yml');
+    run('rm -rf {{release_path}}/.codecov.yml');
+    run('rm -rf {{release_path}}/php.ini');
+    run('rm -rf {{release_path}}/phpunit.xml.dist');
+    run('rm -rf {{release_path}}/phpstan.neon');
+    run('rm -rf {{release_path}}/UPGRADE***');
+    run('rm -rf {{release_path}}/var/docks');
+    run('rm -rf {{release_path}}/var/docker');
+    run('rm -rf {{release_path}}/.gitlab-ci');
+    run('rm -rf {{release_path}}/.phpcs.xml.dist');
+});
+before('deploy:symlink', 'sumo:files:cleanup');
