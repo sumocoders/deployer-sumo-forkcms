@@ -38,18 +38,6 @@ class Configuration
     {
         $values = [];
 
-        $parametersPath = Deployer\get('deploy_path') . '/shared/app/config/parameters.yml';
-
-        if (Deployer\test("[ -f $parametersPath ]")) {
-            // get database url from parameters
-            $parameters = Yaml::parse(Deployer\run("cat $parametersPath"))['parameters'];
-            $databaseUrl = self::getDatabaseUrlFromParameters($parameters);
-
-            if ($databaseUrl !== '') {
-                return new Configuration(['DATABASE_URL' => $databaseUrl]);
-            }
-        }
-
         // check if we have a .env.local or .env file
         $envPath = Deployer\get('deploy_path') . '/shared/.env';
         if (Deployer\test("[ -f $envPath.local ]")) {
@@ -67,17 +55,6 @@ class Configuration
 
     public static function fromLocal(): Configuration
     {
-        $path = getcwd() . '/app/config/parameters.yml';
-
-        if (file_exists($path)) {
-            $parameters = Yaml::parse(file_get_contents($path))['parameters'];
-            $databaseUrl = self::getDatabaseUrlFromParameters($parameters);
-
-            if ($databaseUrl !== '') {
-                return new Configuration(['DATABASE_URL' => $databaseUrl]);
-            }
-        }
-
         if (file_exists(getcwd() . '/.env.local')) {
             $path = getcwd() . '/.env.local';
         } elseif (file_exists(getcwd() . '/.env.dist') && !file_exists(
