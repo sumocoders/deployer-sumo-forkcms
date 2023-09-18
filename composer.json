@@ -1,6 +1,6 @@
 {
     "name": "sumocoders/deployer-sumo-forkcms",
-    "description": "Deployer recipe with SumoCoders specific tasks",
+    "description": "Deployer recipe with SumoCoders specific tasks for Fork CMS v6",
     "type": "library",
     "license": "MIT",
     "authors": [
