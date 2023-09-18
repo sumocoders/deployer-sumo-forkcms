@@ -6,13 +6,13 @@ specific for [SumoCoders](https://sumocoders.be).
 ## Installing
 
 ~~~sh
-composer require tijsverkoyen/deployer-sumo --dev
+composer require sumocoders/deployer-sumo-forkcms --dev
 ~~~
 
 Include recipes in `deploy.php` file.
 
 ```php
-require __DIR__ . '/vendor/tijsverkoyen/deployer-sumo/sumo.php';
+require __DIR__ . '/vendor/sumocoders/deployer-sumo-forkcms/sumo.php';
 ```
 
 
