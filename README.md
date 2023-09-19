@@ -86,6 +86,9 @@ Creates the needed symlinks to link the document root to the correct folder.
 
 Clears opcache and statcache using a file strategy.
   
+### `sumo:cleanup:remove_files`
+
+Removes all files that are not needed on the server. (docker-compose.yml, UPGRADE.md, etc.)
 
 ## License
 
