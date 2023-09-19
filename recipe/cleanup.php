@@ -3,7 +3,7 @@
 namespace Deployer;
 
 desc('Cleanup the codebase');
-task('sumo:cleanup:remove_files', function () {
+task('sumo:cleanup:remove-files', function () {
     run('rm -rf {{release_path}}/.github');
     run('rm -rf {{release_path}}/.git');
     run('rm -rf {{release_path}}/.gitattributes');
@@ -27,4 +27,4 @@ task('sumo:cleanup:remove_files', function () {
     run('rm -rf {{release_path}}/.dockerignore');
     run('rm -rf {{release_path}}/CHANGELOG.nd');
 });
-before('deploy:symlink', 'sumo:cleanup:remove_files');
+before('deploy:symlink', 'sumo:cleanup:remove-files');
